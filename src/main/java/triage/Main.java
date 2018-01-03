@@ -1,16 +1,15 @@
 package triage;
 
 
+import java.net.URI;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
-
-import java.net.URI;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
 
 public class Main {
 
@@ -47,7 +46,7 @@ public class Main {
 		}
 	}
 
-	protected static int getTriageCount(RestTemplate restTemplate, UriComponentsBuilder uriBuilder, String component) {
+	private static int getTriageCount(RestTemplate restTemplate, UriComponentsBuilder uriBuilder, String component) {
 		URI searchUri = uriBuilder.buildAndExpand(component).encode().toUri();
 		Map<String, Object> map = restTemplate.getForObject(searchUri, Map.class);
 		return (int) map.get("total");
